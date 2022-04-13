@@ -20,4 +20,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: vbook/build # The folder the action should deploy.
+          folder: vbook/book # The folder the action should deploy.
