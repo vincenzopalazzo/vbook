@@ -3,5 +3,5 @@ authors = ["Vincenzo Palazzo"]
 language = "en"
 multilingual = false
 src = "src"
-title = "vbook"
+title = "The V Book"
 site-url = "/vbook/"
