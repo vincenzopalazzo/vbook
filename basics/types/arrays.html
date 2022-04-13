@@ -1,0 +1,553 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Arrays - The V Book</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../../intro/hello_world.html"><strong aria-hidden="true">1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../../intro/project.html"><strong aria-hidden="true">2.</strong> Running a project folder</a></li><li class="chapter-item expanded "><a href="../../basics/comments.html"><strong aria-hidden="true">3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="../../basics/variables.html"><strong aria-hidden="true">4.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../../basics/types/index.html"><strong aria-hidden="true">5.</strong> V types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../basics/types/strings.html"><strong aria-hidden="true">5.1.</strong> Strings</a></li><li class="chapter-item expanded "><a href="../../basics/types/numbers.html"><strong aria-hidden="true">5.2.</strong> Numbers</a></li><li class="chapter-item expanded "><a href="../../basics/types/arrays.html" class="active"><strong aria-hidden="true">5.3.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="../../basics/types/maps.html"><strong aria-hidden="true">5.4.</strong> Maps</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The V Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
+<p>An array is a collection of data elements of the same type. An array literal is a
+list of expressions surrounded by square brackets. An individual element can be
+accessed using an <em>index</em> expression. Indexes start from <code>0</code>:</p>
+<pre><code class="language-v">mut nums := [1, 2, 3]
+println(nums) // `[1, 2, 3]`
+println(nums[0]) // `1`
+println(nums[1]) // `2`
+
+nums[1] = 5
+println(nums) // `[1, 5, 3]`
+</code></pre>
+<a id='array-operations' />
+<p>An element can be appended to the end of an array using the push operator <code>&lt;&lt;</code>.
+It can also append an entire array.</p>
+<pre><code class="language-v">mut nums := [1, 2, 3]
+nums &lt;&lt; 4
+println(nums) // &quot;[1, 2, 3, 4]&quot;
+
+// append array
+nums &lt;&lt; [5, 6, 7]
+println(nums) // &quot;[1, 2, 3, 4, 5, 6, 7]&quot;
+</code></pre>
+<pre><code class="language-v">mut names := ['John']
+names &lt;&lt; 'Peter'
+names &lt;&lt; 'Sam'
+// names &lt;&lt; 10  &lt;-- This will not compile. `names` is an array of strings.
+</code></pre>
+<p><code>val in array</code> returns true if the array contains <code>val</code>. See <a href="#in-operator"><code>in</code> operator</a>.</p>
+<pre><code class="language-v">names := ['John', 'Peter', 'Sam']
+println('Alex' in names) // &quot;false&quot;
+</code></pre>
+<h4 id="array-fields"><a class="header" href="#array-fields">Array Fields</a></h4>
+<p>There are two fields that control the &quot;size&quot; of an array:</p>
+<ul>
+<li><code>len</code>: <em>length</em> - the number of pre-allocated and initialized elements in the array</li>
+<li><code>cap</code>: <em>capacity</em> - the amount of memory space which has been reserved for elements,
+but not initialized or counted as elements. The array can grow up to this size without
+being reallocated. Usually, V takes care of this field automatically but there are
+cases where the user may want to do manual optimizations (see <a href="#array-initialization">below</a>).</li>
+</ul>
+<pre><code class="language-v">mut nums := [1, 2, 3]
+println(nums.len) // &quot;3&quot;
+println(nums.cap) // &quot;3&quot; or greater
+nums = [] // The array is now empty
+println(nums.len) // &quot;0&quot;
+</code></pre>
+<p><code>data</code> is a field (of type <code>voidptr</code>) with the address of the first 
+element. This is for low-level <a href="#memory-unsafe-code"><code>unsafe</code></a> code.</p>
+<p>Note that the fields are read-only and can't be modified by the user.</p>
+<h4 id="array-initialization"><a class="header" href="#array-initialization">Array Initialization</a></h4>
+<p>The type of an array is determined by the first element:</p>
+<ul>
+<li><code>[1, 2, 3]</code> is an array of ints (<code>[]int</code>).</li>
+<li><code>['a', 'b']</code> is an array of strings (<code>[]string</code>).</li>
+</ul>
+<p>The user can explicitly specify the type for the first element: <code>[byte(16), 32, 64, 128]</code>.
+V arrays are homogeneous (all elements must have the same type).
+This means that code like <code>[1, 'a']</code> will not compile.</p>
+<p>The above syntax is fine for a small number of known elements but for very large or empty
+arrays there is a second initialization syntax:</p>
+<pre><code class="language-v">mut a := []int{len: 10000, cap: 30000, init: 3}
+</code></pre>
+<p>This creates an array of 10000 <code>int</code> elements that are all initialized with <code>3</code>. Memory
+space is reserved for 30000 elements. The parameters <code>len</code>, <code>cap</code> and <code>init</code> are optional;
+<code>len</code> defaults to <code>0</code> and <code>init</code> to the default initialization of the element type (<code>0</code>
+for numerical type, <code>''</code> for <code>string</code>, etc). The run time system makes sure that the
+capacity is not smaller than <code>len</code> (even if a smaller value is specified explicitly):</p>
+<pre><code class="language-v">arr := []int{len: 5, init: -1}
+// `arr == [-1, -1, -1, -1, -1]`, arr.cap == 5
+
+// Declare an empty array:
+users := []int{}
+</code></pre>
+<p>Setting the capacity improves performance of pushing elements to the array
+as reallocations can be avoided:</p>
+<pre><code class="language-v">mut numbers := []int{cap: 1000}
+println(numbers.len) // 0
+// Now appending elements won't reallocate
+for i in 0 .. 1000 {
+	numbers &lt;&lt; i
+}
+</code></pre>
+<p>Note: The above code uses a <a href="#range-for">range <code>for</code></a> statement.</p>
+<p>You can initialize the array by accessing the <code>it</code> variable which gives 
+the index as shown here:</p>
+<pre><code class="language-v">count := []int{len: 4, init: it}
+assert count == [0, 1, 2, 3]
+
+mut square := []int{len: 6, init: it * it}
+// square == [0, 1, 4, 9, 16, 25]
+</code></pre>
+<h4 id="array-types"><a class="header" href="#array-types">Array Types</a></h4>
+<p>An array can be of these types:
+| Types        | Example Definition                   |
+| ------------ | ------------------------------------ |
+| Number       | <code>[]int,[]i64</code>                        |
+| String       | <code>[]string</code>                           |
+| Rune         | <code>[]rune</code>                             |
+| Boolean      | <code>[]bool</code>                             |
+| Array        | <code>[][]int</code>                            |
+| Struct       | <code>[]MyStructName</code>                     |
+| Channel      | <code>[]chan f64</code>                         |
+| Function     | <code>[]MyFunctionType</code> <code>[]fn (int) bool</code> |
+| Interface    | <code>[]MyInterfaceName</code>                  |
+| Sum Type     | <code>[]MySumTypeName</code>                    |
+| Generic Type | <code>[]T</code>                                |
+| Map          | <code>[]map[string]f64</code>                   |
+| Enum         | <code>[]MyEnumType</code>                       |
+| Alias        | <code>[]MyAliasTypeName</code>                  |
+| Thread       | <code>[]thread int</code>                       |
+| Reference    | <code>[]&amp;f64</code>                             |
+| Shared       | <code>[]shared MyStructType</code>              |</p>
+<p><strong>Example Code:</strong></p>
+<p>This example uses <a href="#structs">Structs</a> and <a href="#sum-types">Sum Types</a> to create an array
+which can handle different types (e.g. Points, Lines) of data elements.</p>
+<pre><code class="language-v">struct Point {
+	x int
+	y int
+}
+
+struct Line {
+	p1 Point
+	p2 Point
+}
+
+type ObjectSumType = Line | Point
+
+mut object_list := []ObjectSumType{}
+object_list &lt;&lt; Point{1, 1}
+object_list &lt;&lt; Line{
+	p1: Point{3, 3}
+	p2: Point{4, 4}
+}
+dump(object_list)
+/*
+object_list: [ObjectSumType(Point{
+    x: 1
+    y: 1
+}), ObjectSumType(Line{
+    p1: Point{
+        x: 3
+        y: 3
+    }
+    p2: Point{
+        x: 4
+        y: 4
+    }
+})]
+*/
+</code></pre>
+<h4 id="multidimensional-arrays"><a class="header" href="#multidimensional-arrays">Multidimensional Arrays</a></h4>
+<p>Arrays can have more than one dimension.</p>
+<p>2d array example:</p>
+<pre><code class="language-v">mut a := [][]int{len: 2, init: []int{len: 3}}
+a[0][1] = 2
+println(a) // [[0, 2, 0], [0, 0, 0]]
+</code></pre>
+<p>3d array example:</p>
+<pre><code class="language-v">mut a := [][][]int{len: 2, init: [][]int{len: 3, init: []int{len: 2}}}
+a[0][1][1] = 2
+println(a) // [[[0, 0], [0, 2], [0, 0]], [[0, 0], [0, 0], [0, 0]]]
+</code></pre>
+<h4 id="array-methods"><a class="header" href="#array-methods">Array methods</a></h4>
+<p>All arrays can be easily printed with <code>println(arr)</code> and converted to a string
+with <code>s := arr.str()</code>.</p>
+<p>Copying the data from the array is done with <code>.clone()</code>:</p>
+<pre><code class="language-v">nums := [1, 2, 3]
+nums_copy := nums.clone()
+</code></pre>
+<p>Arrays can be efficiently filtered and mapped with the <code>.filter()</code> and
+<code>.map()</code> methods:</p>
+<pre><code class="language-v">nums := [1, 2, 3, 4, 5, 6]
+even := nums.filter(it % 2 == 0)
+println(even) // [2, 4, 6]
+// filter can accept anonymous functions
+even_fn := nums.filter(fn (x int) bool {
+	return x % 2 == 0
+})
+println(even_fn)
+</code></pre>
+<pre><code class="language-v">words := ['hello', 'world']
+upper := words.map(it.to_upper())
+println(upper) // ['HELLO', 'WORLD']
+// map can also accept anonymous functions
+upper_fn := words.map(fn (w string) string {
+	return w.to_upper()
+})
+println(upper_fn) // ['HELLO', 'WORLD']
+</code></pre>
+<p><code>it</code> is a builtin variable which refers to the element currently being 
+processed in filter/map methods.</p>
+<p>Additionally, <code>.any()</code> and <code>.all()</code> can be used to conveniently test
+for elements that satisfy a condition.</p>
+<pre><code class="language-v">nums := [1, 2, 3]
+println(nums.any(it == 2)) // true
+println(nums.all(it &gt;= 2)) // false
+</code></pre>
+<p>There are further built-in methods for arrays:</p>
+<ul>
+<li><code>a.repeat(n)</code> concatenates the array elements <code>n</code> times </li>
+<li><code>a.insert(i, val)</code> inserts a new element <code>val</code> at index <code>i</code> and 
+shifts all following elements to the right</li>
+<li><code>a.insert(i, [3, 4, 5])</code> inserts several elements</li>
+<li><code>a.prepend(val)</code> inserts a value at the beginning, equivalent to <code>a.insert(0, val)</code></li>
+<li><code>a.prepend(arr)</code> inserts elements of array <code>arr</code> at the beginning</li>
+<li><code>a.trim(new_len)</code> truncates the length (if <code>new_length &lt; a.len</code>, otherwise does nothing)</li>
+<li><code>a.clear()</code> empties the array without changing <code>cap</code> (equivalent to <code>a.trim(0)</code>)</li>
+<li><code>a.delete_many(start, size)</code> removes <code>size</code> consecutive elements from index <code>start</code>
+– triggers reallocation</li>
+<li><code>a.delete(index)</code> equivalent to <code>a.delete_many(index, 1)</code></li>
+<li><code>a.delete_last()</code> removes the last element</li>
+<li><code>a.first()</code> equivalent to <code>a[0]</code></li>
+<li><code>a.last()</code> equivalent to <code>a[a.len - 1]</code></li>
+<li><code>a.pop()</code> removes the last element and returns it</li>
+<li><code>a.reverse()</code> makes a new array with the elements of <code>a</code> in reverse order</li>
+<li><code>a.reverse_in_place()</code> reverses the order of elements in <code>a</code></li>
+<li><code>a.join(joiner)</code> concatenates an array of strings into one string 
+using <code>joiner</code> string as a separator</li>
+</ul>
+<p>See also <a href="https://modules.vlang.io/arrays.html">vlib/arrays</a>.</p>
+<h5 id="sorting-arrays"><a class="header" href="#sorting-arrays">Sorting Arrays</a></h5>
+<p>Sorting arrays of all kinds is very simple and intuitive. Special variables <code>a</code> and <code>b</code>
+are used when providing a custom sorting condition.</p>
+<pre><code class="language-v">mut numbers := [1, 3, 2]
+numbers.sort() // 1, 2, 3
+numbers.sort(a &gt; b) // 3, 2, 1
+</code></pre>
+<pre><code class="language-v">struct User {
+	age  int
+	name string
+}
+
+mut users := [User{21, 'Bob'}, User{20, 'Zarkon'}, User{25, 'Alice'}]
+users.sort(a.age &lt; b.age) // sort by User.age int field
+users.sort(a.name &gt; b.name) // reverse sort by User.name string field
+</code></pre>
+<p>V also supports custom sorting, through the <code>sort_with_compare</code> array method.
+Which expects a comparing function which will define the sort order.
+Useful for sorting on multiple fields at the same time by custom sorting rules.
+The code below sorts the array ascending on <code>name</code> and descending <code>age</code>.</p>
+<pre><code class="language-v">struct User {
+	age  int
+	name string
+}
+
+mut users := [User{21, 'Bob'}, User{65, 'Bob'}, User{25, 'Alice'}]
+
+custom_sort_fn := fn (a &amp;User, b &amp;User) int {
+	// return -1 when a comes before b
+	// return 0, when both are in same order
+	// return 1 when b comes before a
+	if a.name == b.name {
+		if a.age &lt; b.age {
+			return 1
+		}
+		if a.age &gt; b.age {
+			return -1
+		}
+		return 0
+	}
+	if a.name &lt; b.name {
+		return -1
+	} else if a.name &gt; b.name {
+		return 1
+	}
+	return 0
+}
+users.sort_with_compare(custom_sort_fn)
+</code></pre>
+<h4 id="array-slices"><a class="header" href="#array-slices">Array Slices</a></h4>
+<p>A slice is a part of a parent array. Initially it refers to the elements
+between two indices separated by a <code>..</code> operator. The right-side index must
+be greater than or equal to the left side index.</p>
+<p>If a right-side index is absent, it is assumed to be the array length. If a
+left-side index is absent, it is assumed to be 0.</p>
+<pre><code class="language-v">nums := [0, 10, 20, 30, 40]
+println(nums[1..4]) // [10, 20, 30]
+println(nums[..4]) // [0, 10, 20, 30]
+println(nums[1..]) // [10, 20, 30, 40]
+</code></pre>
+<p>In V slices are arrays themselves (they are not distinct types). As a result
+all array operations may be performed on them. E.g. they can be pushed onto an
+array of the same type:</p>
+<pre><code class="language-v">array_1 := [3, 5, 4, 7, 6]
+mut array_2 := [0, 1]
+array_2 &lt;&lt; array_1[..3]
+println(array_2) // `[0, 1, 3, 5, 4]`
+</code></pre>
+<p>A slice is always created with the smallest possible capacity <code>cap == len</code> (see
+<a href="#array-initialization"><code>cap</code> above</a>) no matter what the capacity or length
+of the parent array is. As a result it is immediately reallocated and copied to another
+memory location when the size increases thus becoming independent from the
+parent array (<em>copy on grow</em>). In particular pushing elements to a slice
+does not alter the parent:</p>
+<pre><code class="language-v">mut a := [0, 1, 2, 3, 4, 5]
+mut b := a[2..4]
+b[0] = 7 // `b[0]` is referring to `a[2]`
+println(a) // `[0, 1, 7, 3, 4, 5]`
+b &lt;&lt; 9
+// `b` has been reallocated and is now independent from `a`
+println(a) // `[0, 1, 7, 3, 4, 5]` - no change
+println(b) // `[7, 3, 9]`
+</code></pre>
+<p>Appending to the parent array may or may not make it independent from its child slices.
+The behaviour depends on the parent's capacity and is predictable:</p>
+<pre><code class="language-v">mut a := []int{len: 5, cap: 6, init: 2}
+mut b := a[1..4]
+a &lt;&lt; 3
+// no reallocation - fits in `cap`
+b[2] = 13 // `a[3]` is modified
+a &lt;&lt; 4
+// a has been reallocated and is now independent from `b` (`cap` was exceeded)
+b[1] = 3 // no change in `a`
+println(a) // `[2, 2, 2, 13, 2, 3, 4]`
+println(b) // `[2, 3, 13]`
+</code></pre>
+<p>You can call .clone() on the slice, if you do want to have an independent copy right away:</p>
+<pre><code class="language-v">mut a := [0, 1, 2, 3, 4, 5]
+mut b := a[2..4].clone()
+b[0] = 7 // NB: `b[0]` is NOT referring to `a[2]`, as it would have been, without the .clone()
+println(a) // [0, 1, 2, 3, 4, 5]
+println(b) // [7, 3]
+</code></pre>
+<h5 id="slices-with-negative-indexes"><a class="header" href="#slices-with-negative-indexes">Slices with negative indexes</a></h5>
+<p>V supports array and string slices with negative indexes.
+Negative indexing starts from the end of the array towards the start,
+for example <code>-3</code> is equal to <code>array.len - 3</code>. 
+Negative slices have a different syntax from normal slices, i.e. you need
+to add a <code>gate</code> between the array name and the square bracket: <code>a#[..-3]</code>.
+The <code>gate</code> specifies that this is a different type of slice and remember that
+the result is &quot;locked&quot; inside the array.
+The returned slice is always a valid array, though it may be empty:</p>
+<pre><code class="language-v">a := [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+println(a#[-3..]) // [7, 8, 9]
+println(a#[-20..]) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+println(a#[-20..-8]) // [0, 1]
+println(a#[..-3]) // [0, 1, 2, 3, 4, 5, 6]
+
+// empty arrays
+println(a#[-20..-10]) // []
+println(a#[20..10]) // []
+println(a#[20..30]) // []
+</code></pre>
+<h4 id="array-method-chaining"><a class="header" href="#array-method-chaining">Array method chaining</a></h4>
+<p>You can chain the calls of array methods like <code>.filter()</code> and <code>.map()</code> and use
+the <code>it</code> built-in variable to achieve a classic <code>map/filter</code> functional paradigm:</p>
+<pre><code class="language-v">// using filter, map and negatives array slices
+files := ['pippo.jpg', '01.bmp', '_v.txt', 'img_02.jpg', 'img_01.JPG']
+filtered := files.filter(it#[-4..].to_lower() == '.jpg').map(it.to_upper())
+// ['PIPPO.JPG', 'IMG_02.JPG', 'IMG_01.JPG']
+</code></pre>
+<h3 id="fixed-size-arrays"><a class="header" href="#fixed-size-arrays">Fixed size arrays</a></h3>
+<p>V also supports arrays with fixed size. Unlike ordinary arrays, their
+length is constant. You cannot append elements to them, nor shrink them.
+You can only modify their elements in place.</p>
+<p>However, access to the elements of fixed size arrays is more efficient,
+they need less memory than ordinary arrays, and unlike ordinary arrays,
+their data is on the stack, so you may want to use them as buffers if you
+do not want additional heap allocations.</p>
+<p>Most methods are defined to work on ordinary arrays, not on fixed size arrays.
+You can convert a fixed size array to an ordinary array with slicing:</p>
+<pre><code class="language-v">mut fnums := [3]int{} // fnums is a fixed size array with 3 elements.
+fnums[0] = 1
+fnums[1] = 10
+fnums[2] = 100
+println(fnums) // =&gt; [1, 10, 100]
+println(typeof(fnums).name) // =&gt; [3]int
+
+fnums2 := [1, 10, 100]! // short init syntax that does the same (the syntax will probably change)
+
+anums := fnums[..] // same as `anums := fnums[0..fnums.len]`
+println(anums) // =&gt; [1, 10, 100]
+println(typeof(anums).name) // =&gt; []int
+</code></pre>
+<p>Note that slicing will cause the data of the fixed size array to be copied to
+the newly created ordinary array.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../basics/types/numbers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../basics/types/maps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../basics/types/numbers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../basics/types/maps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

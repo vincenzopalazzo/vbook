@@ -3,33 +3,33 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - The V Book</title>
+        <title>Variables - The V Book</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html" class="active">Introduction</a></li><li class="chapter-item expanded "><a href="intro/hello_world.html"><strong aria-hidden="true">1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="intro/project.html"><strong aria-hidden="true">2.</strong> Running a project folder</a></li><li class="chapter-item expanded "><a href="basics/comments.html"><strong aria-hidden="true">3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="basics/variables.html"><strong aria-hidden="true">4.</strong> Variables</a></li><li class="chapter-item expanded "><a href="basics/types/index.html"><strong aria-hidden="true">5.</strong> V types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/types/strings.html"><strong aria-hidden="true">5.1.</strong> Strings</a></li><li class="chapter-item expanded "><a href="basics/types/numbers.html"><strong aria-hidden="true">5.2.</strong> Numbers</a></li><li class="chapter-item expanded "><a href="basics/types/arrays.html"><strong aria-hidden="true">5.3.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="basics/types/maps.html"><strong aria-hidden="true">5.4.</strong> Maps</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../intro/hello_world.html"><strong aria-hidden="true">1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../intro/project.html"><strong aria-hidden="true">2.</strong> Running a project folder</a></li><li class="chapter-item expanded "><a href="../basics/comments.html"><strong aria-hidden="true">3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="../basics/variables.html" class="active"><strong aria-hidden="true">4.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../basics/types/index.html"><strong aria-hidden="true">5.</strong> V types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/types/strings.html"><strong aria-hidden="true">5.1.</strong> Strings</a></li><li class="chapter-item expanded "><a href="../basics/types/numbers.html"><strong aria-hidden="true">5.2.</strong> Numbers</a></li><li class="chapter-item expanded "><a href="../basics/types/arrays.html"><strong aria-hidden="true">5.3.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="../basics/types/maps.html"><strong aria-hidden="true">5.4.</strong> Maps</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -107,7 +107,7 @@
                     <h1 class="menu-title">The V Book</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                     </div>
@@ -134,62 +134,90 @@
 
                 <div id="content" class="content">
                     <main>
-                        <div align="center">
-<p>
-    <img width="80" src="https://raw.githubusercontent.com/vlang/v-logo/master/dist/v-logo.svg?sanitize=true">
-</p>
-</div>
-<p>V is a statically typed compiled programming language designed for building maintainable software.</p>
-<p>It's similar to Go and its design has also been influenced by Oberon, Rust, Swift, Kotlin, and Python.</p>
-<p>V is a very simple language. Going through this documentation will take you about an hour, and by the end of it you will have pretty much learned the entire language.</p>
-<p>The language promotes writing simple and clear code with minimal abstraction.</p>
-<p>Despite being simple, V gives the developer a lot of power. Anything you can do in other languages, you can do in V.</p>
-<h2 id="install-from-source"><a class="header" href="#install-from-source">Install from source</a></h2>
-<p>The major way to get the latest and greatest V, is to <strong>install it from source</strong>.
-It is <strong>easy</strong>, and it usually takes <strong>only a few seconds</strong>.</p>
-<h3 id="linux-macos-freebsd-etc"><a class="header" href="#linux-macos-freebsd-etc">Linux, macOS, FreeBSD, etc:</a></h3>
-<p>You need <code>git</code>, and a C compiler like <code>tcc</code>, <code>gcc</code> or <code>clang</code>, and <code>make</code>:</p>
-<pre><code class="language-bash">git clone https://github.com/vlang/v
-cd v
-make
+                        <h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
+<pre><code class="language-v">name := 'Bob'
+age := 20
+large_number := i64(9999999999)
+println(name)
+println(age)
+println(large_number)
 </code></pre>
-<p>See <a href="https://github.com/vlang/v/wiki/Installing-a-C-compiler-on-Linux-and-macOS">here</a>
-for how to install the development tools.</p>
-<h3 id="windows"><a class="header" href="#windows">Windows:</a></h3>
-<p>You need <code>git</code>, and a C compiler like <code>tcc</code>, <code>gcc</code>, <code>clang</code> or <code>msvc</code>:</p>
-<pre><code class="language-bash">git clone https://github.com/vlang/v
-cd v
-make.bat -tcc
+<p>Variables are declared and initialized with <code>:=</code>. This is the only
+way to declare variables in V. This means that variables always have an initial
+value.</p>
+<p>The variable's type is inferred from the value on the right hand side.
+To choose a different type, use type conversion:
+the expression <code>T(v)</code> converts the value <code>v</code> to the
+type <code>T</code>.</p>
+<p>Unlike most other languages, V only allows defining variables in functions.
+Global (module level) variables are not allowed. There's no global state in V
+(see <a href="#pure-functions-by-default">Pure functions by default</a> for details).</p>
+<p>For consistency across different code bases, all variable and function names
+must use the <code>snake_case</code> style, as opposed to type names, which must use <code>PascalCase</code>.</p>
+<h3 id="mutable-variables"><a class="header" href="#mutable-variables">Mutable variables</a></h3>
+<pre><code class="language-v">mut age := 20
+println(age)
+age = 21
+println(age)
 </code></pre>
-<p>NB: You can also pass one of <code>-gcc</code>, <code>-msvc</code>, <code>-clang</code> to <code>make.bat</code> instead,
-if you do prefer to use a different C compiler, but -tcc is small, fast, and
-easy to install (V will download a prebuilt binary automatically).</p>
-<p>For C compiler downloads and more info, see 
-<a href="https://github.com/vlang/v/wiki/Installing-a-C-compiler-on-Windows">here</a>.</p>
-<p>It is recommended to add this folder to the PATH of your environment variables.
-This can be done with the command <code>v.exe symlink</code>.</p>
-<p>NB: Some antivirus programs (like Symantec) are paranoid about executables with
-1 letter names (like <code>v.exe</code>). One possible workaround in that situation is
-copying <code>v.exe</code> to <code>vlang.exe</code> (so that the copy is newer), or whitelisting the
-V folder in your antivirus program.</p>
-<h3 id="android"><a class="header" href="#android">Android</a></h3>
-<p>Running V graphical apps on Android is also possible via <a href="https://github.com/vlang/vab">vab</a>.</p>
-<p>V Android dependencies: <strong>V</strong>, <strong>Java JDK</strong> &gt;= 8, Android <strong>SDK + NDK</strong>.</p>
-<ol>
-<li>Install dependencies (see <a href="https://github.com/vlang/vab">vab</a>)</li>
-<li>Connect your Android device</li>
-<li>Run:</li>
-</ol>
-<pre><code class="language-bash">git clone https://github.com/vlang/vab &amp;&amp; cd vab &amp;&amp; v vab.v
-./vab --device auto run /path/to/v/examples/sokol/particles
+<p>To change the value of the variable use <code>=</code>. In V, variables are
+immutable by default.
+To be able to change the value of the variable, you have to declare it with <code>mut</code>.</p>
+<p>Try compiling the program above after removing <code>mut</code> from the first line.</p>
+<h3 id="initialization-vs-assignment"><a class="header" href="#initialization-vs-assignment">Initialization vs assignment</a></h3>
+<p>Note the (important) difference between <code>:=</code> and <code>=</code>.
+<code>:=</code> is used for declaring and initializing, <code>=</code> is used for assigning.</p>
+<pre><code class="language-v failcompile">fn main() {
+	age = 21
+}
 </code></pre>
-<p>For more details and troubleshooting, please visit the <a href="https://github.com/vlang/vab">vab GitHub repository</a>.</p>
+<p>This code will not compile, because the variable <code>age</code> is not declared.
+All variables need to be declared in V.</p>
+<pre><code class="language-v">fn main() {
+	age := 21
+}
+</code></pre>
+<p>The values of multiple variables can be changed in one line.
+In this way, their values can be swapped without an intermediary variable.</p>
+<pre><code class="language-v">mut a := 0
+mut b := 1
+println('$a, $b') // 0, 1
+a, b = b, a
+println('$a, $b') // 1, 0
+</code></pre>
+<h3 id="declaration-errors"><a class="header" href="#declaration-errors">Declaration errors</a></h3>
+<p>In development mode the compiler will warn you that you haven't used the variable
+(you'll get an &quot;unused variable&quot; warning).
+In production mode (enabled by passing the <code>-prod</code> flag to v – <code>v -prod foo.v</code>)
+it will not compile at all (like in Go).</p>
+<pre><code class="language-v failcompile nofmt">fn main() {
+	a := 10
+	if true {
+		a := 20 // error: redefinition of `a`
+	}
+	// warning: unused variable `a`
+}
+</code></pre>
+<p>Unlike most languages, variable shadowing is not allowed. Declaring a variable with a name
+that is already used in a parent scope will cause a compilation error.</p>
+<p>You can shadow imported modules though, as it is very useful in some situations:</p>
+<pre><code class="language-v ignore">import ui
+import gg
+
+fn draw(ctx &amp;gg.Context) {
+	gg := ctx.parent.get_ui().gg
+	gg.draw_rect(10, 10, 100, 50)
+}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="intro/hello_world.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="prev" href="../basics/comments.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../basics/types/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -198,7 +226,10 @@ V folder in your antivirus program.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="intro/hello_world.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="prev" href="../basics/comments.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../basics/types/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -208,12 +239,12 @@ V folder in your antivirus program.</p>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
     </body>

@@ -3,34 +3,33 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Page not found - The V Book</title>
-        <base href="/">
+        <title>Hello World - The V Book</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -76,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="intro/hello_world.html"><strong aria-hidden="true">1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="intro/project.html"><strong aria-hidden="true">2.</strong> Running a project folder</a></li><li class="chapter-item expanded "><a href="basics/comments.html"><strong aria-hidden="true">3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="basics/variables.html"><strong aria-hidden="true">4.</strong> Variables</a></li><li class="chapter-item expanded "><a href="basics/types/index.html"><strong aria-hidden="true">5.</strong> V types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/types/strings.html"><strong aria-hidden="true">5.1.</strong> Strings</a></li><li class="chapter-item expanded "><a href="basics/types/numbers.html"><strong aria-hidden="true">5.2.</strong> Numbers</a></li><li class="chapter-item expanded "><a href="basics/types/arrays.html"><strong aria-hidden="true">5.3.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="basics/types/maps.html"><strong aria-hidden="true">5.4.</strong> Maps</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../intro/hello_world.html" class="active"><strong aria-hidden="true">1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../intro/project.html"><strong aria-hidden="true">2.</strong> Running a project folder</a></li><li class="chapter-item expanded "><a href="../basics/comments.html"><strong aria-hidden="true">3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="../basics/variables.html"><strong aria-hidden="true">4.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../basics/types/index.html"><strong aria-hidden="true">5.</strong> V types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/types/strings.html"><strong aria-hidden="true">5.1.</strong> Strings</a></li><li class="chapter-item expanded "><a href="../basics/types/numbers.html"><strong aria-hidden="true">5.2.</strong> Numbers</a></li><li class="chapter-item expanded "><a href="../basics/types/arrays.html"><strong aria-hidden="true">5.3.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="../basics/types/maps.html"><strong aria-hidden="true">5.4.</strong> Maps</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -108,7 +107,7 @@
                     <h1 class="menu-title">The V Book</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                     </div>
@@ -135,19 +134,55 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h2 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h2>
+<pre><code class="language-v">fn main() {
+	println('hello world')
+}
+</code></pre>
+<p>Save this snippet into a file named <code>hello.v</code>. Now do: <code>v run hello.v</code>.</p>
+<blockquote>
+<p>That is assuming you have symlinked your V with <code>v symlink</code>, as described
+<a href="https://github.com/vlang/v/blob/master/README.md#symlinking">here</a>.
+If you haven't yet, you have to type the path to V manually.</p>
+</blockquote>
+<p>Congratulations - you just wrote and executed your first V program!</p>
+<p>You can compile a program without execution with <code>v hello.v</code>.
+See <code>v help</code> for all supported commands.</p>
+<p>From the example above, you can see that functions are declared with the <code>fn</code> keyword.
+The return type is specified after the function name.
+In this case <code>main</code> doesn't return anything, so there is no return type.</p>
+<p>As in many other languages (such as C, Go, and Rust), <code>main</code> is the entry point of your program.</p>
+<p><a href="#println"><code>println</code></a> is one of the few <a href="#builtin-functions">built-in functions</a>.
+It prints the value passed to it to standard output.</p>
+<p><code>fn main()</code> declaration can be skipped in one file programs.
+This is useful when writing small programs, &quot;scripts&quot;, or just learning the language.
+For brevity, <code>fn main()</code> will be skipped in this tutorial.</p>
+<p>This means that a &quot;hello world&quot; program in V is as simple as</p>
+<pre><code class="language-v">println('hello world')
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../intro/project.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../intro/project.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
@@ -155,12 +190,12 @@
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
     </body>

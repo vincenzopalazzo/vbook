@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Strings - The V Book</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../../intro/hello_world.html"><strong aria-hidden="true">1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../../intro/project.html"><strong aria-hidden="true">2.</strong> Running a project folder</a></li><li class="chapter-item expanded "><a href="../../basics/comments.html"><strong aria-hidden="true">3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="../../basics/variables.html"><strong aria-hidden="true">4.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../../basics/types/index.html"><strong aria-hidden="true">5.</strong> V types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../basics/types/strings.html" class="active"><strong aria-hidden="true">5.1.</strong> Strings</a></li><li class="chapter-item expanded "><a href="../../basics/types/numbers.html"><strong aria-hidden="true">5.2.</strong> Numbers</a></li><li class="chapter-item expanded "><a href="../../basics/types/arrays.html"><strong aria-hidden="true">5.3.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="../../basics/types/maps.html"><strong aria-hidden="true">5.4.</strong> Maps</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The V Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
+<pre><code class="language-v nofmt">name := 'Bob'
+assert name.len == 3       // will print 3
+assert name[0] == byte(66) // indexing gives a byte, byte(66) == `B`
+assert name[1..3] == 'ob'  // slicing gives a string 'ob'
+
+// escape codes
+windows_newline := '\r\n'      // escape special characters like in C
+assert windows_newline.len == 2
+
+// arbitrary bytes can be directly specified using `\x##` notation where `#` is
+// a hex digit aardvark_str := '\x61ardvark' assert aardvark_str == 'aardvark'
+assert '\xc0'[0] == byte(0xc0)
+
+// or using octal escape `\###` notation where `#` is an octal digit
+aardvark_str2 := '\141ardvark'
+assert aardvark_str2 == 'aardvark'
+
+// Unicode can be specified directly as `\u####` where # is a hex digit
+// and will be converted internally to its UTF-8 representation
+star_str := '\u2605' // ★
+assert star_str == '★'
+assert star_str == '\xe2\x98\x85' // UTF-8 can be specified this way too.
+</code></pre>
+<p>In V, a string is a read-only array of bytes. All Unicode characters are encoded using UTF-8:</p>
+<pre><code class="language-v">s := 'hello 🌎' // emoji takes 4 bytes
+assert s.len == 10
+
+arr := s.bytes() // convert `string` to `[]byte`
+assert arr.len == 10
+
+s2 := arr.bytestr() // convert `[]byte` to `string`
+assert s2 == s
+</code></pre>
+<p>String values are immutable. You cannot mutate elements:</p>
+<pre><code class="language-v failcompile">mut s := 'hello 🌎'
+s[0] = `H` // not allowed
+</code></pre>
+<blockquote>
+<p>error: cannot assign to <code>s[i]</code> since V strings are immutable</p>
+</blockquote>
+<p>Note that indexing a string will produce a <code>byte</code>, not a <code>rune</code> nor another <code>string</code>. Indexes
+correspond to <em>bytes</em> in the string, not Unicode code points. If you want to convert the <code>byte</code> to a
+<code>string</code>, use the <code>.ascii_str()</code> method on the <code>byte</code>:</p>
+<pre><code class="language-v">country := 'Netherlands'
+println(country[0]) // Output: 78
+println(country[0].ascii_str()) // Output: N
+</code></pre>
+<p>Both single and double quotes can be used to denote strings. For consistency, <code>vfmt</code> converts double
+quotes to single quotes unless the string contains a single quote character.</p>
+<p>For raw strings, prepend <code>r</code>. Escape handling is not done for raw strings:</p>
+<pre><code class="language-v">s := r'hello\nworld' // the `\n` will be preserved as two characters
+println(s) // &quot;hello\nworld&quot;
+</code></pre>
+<p>Strings can be easily converted to integers:</p>
+<pre><code class="language-v">s := '42'
+n := s.int() // 42
+
+// all int literals are supported
+assert '0xc3'.int() == 195
+assert '0o10'.int() == 8
+assert '0b1111_0000_1010'.int() == 3850
+assert '-0b1111_0000_1010'.int() == -3850
+</code></pre>
+<p>For more advanced <code>string</code> processing and conversions, refer to the
+<a href="https://modules.vlang.io/strconv.html">vlib/strconv</a> module.</p>
+<h3 id="string-interpolation"><a class="header" href="#string-interpolation">String interpolation</a></h3>
+<p>Basic interpolation syntax is pretty simple - use <code>$</code> before a variable name. The variable will be
+converted to a string and embedded into the literal:</p>
+<pre><code class="language-v">name := 'Bob'
+println('Hello, $name!') // Hello, Bob!
+</code></pre>
+<p>It also works with fields: <code>'age = $user.age'</code>. If you need more complex expressions, use <code>${}</code>:
+<code>'can register = ${user.age &gt; 13}'</code>.</p>
+<p>Format specifiers similar to those in C's <code>printf()</code> are also supported. <code>f</code>, <code>g</code>, <code>x</code>, <code>o</code>, <code>b</code>,
+etc. are optional and specify the output format. The compiler takes care of the storage size, so
+there is no <code>hd</code> or <code>llu</code>.</p>
+<p>To use a format specifier, follow this pattern:</p>
+<p><code>${varname:[flags][width][.precision][type]}</code></p>
+<ul>
+<li>flags: may be zero or more of the following: <code>-</code> to left-align output within the field, <code>0</code> to use
+<code>0</code> as the padding character instead of the default <code>space</code> character. (Note: V does not currently
+support the use of <code>'</code> or <code>#</code> as format flags, and V supports but doesn't need <code>+</code> to right-align
+since that's the default.)</li>
+<li>width: may be an integer value describing the minimum width of total field to output.</li>
+<li>precision: an integer value preceded by a <code>.</code> will guarantee that many digits after the decimal
+point, if the input variable is a float. Ignored if variable is an integer.</li>
+<li>type: <code>f</code> and <code>F</code> specify the input is a float and should be rendered as such, <code>e</code> and <code>E</code> specify
+the input is a float and should be rendered as an exponent (partially broken), <code>g</code> and <code>G</code> specify
+the input is a float--the renderer will use floating point notation for small values and exponent
+notation for large values, <code>d</code> specifies the input is an integer and should be rendered in base-10
+digits, <code>x</code> and <code>X</code> require an integer and will render it as hexadecimal digits, <code>o</code> requires an
+integer and will render it as octal digits, <code>b</code> requires an integer and will render it as binary
+digits, <code>s</code> requires a string (almost never used).</li>
+</ul>
+<p>Note: when a numeric type can render alphabetic characters, such as hex strings or special values
+like <code>infinity</code>, the lowercase version of the type forces lowercase alphabetics and the uppercase
+version forces uppercase alphabetics.</p>
+<p>Also note: in most cases, it's best to leave the format type empty. Floats will be rendered by
+default as <code>g</code>, integers will be rendered by default as <code>d</code>, and <code>s</code> is almost always redundant.
+There are only three cases where specifying a type is recommended:</p>
+<ul>
+<li>format strings are parsed at compile time, so specifing a type can help detect errors then</li>
+<li>format strings default to using lowercase letters for hex digits and the <code>e</code> in exponents. Use a
+uppercase type to force the use of uppercase hex digits and an uppercase <code>E</code> in exponents.</li>
+<li>format strings are the most convenient way to get hex, binary or octal strings from an integer.</li>
+</ul>
+<p>See
+<a href="https://en.wikipedia.org/wiki/Printf_format_string#Format_placeholder_specification">Format Placeholder Specification</a>
+for more information.</p>
+<pre><code class="language-v">x := 123.4567
+println('[${x:.2}]') // round to two decimal places =&gt; [123.46]
+println('[${x:10}]') // right-align with spaces on the left =&gt; [   123.457]
+println('[${int(x):-10}]') // left-align with spaces on the right =&gt; [123       ]
+println('[${int(x):010}]') // pad with zeros on the left =&gt; [0000000123]
+println('[${int(x):b}]') // output as binary =&gt; [1111011]
+println('[${int(x):o}]') // output as octal =&gt; [173]
+println('[${int(x):X}]') // output as uppercase hex =&gt; [7B]
+
+println('[${10.0000:.2}]') // remove insignificant 0s at the end =&gt; [10]
+println('[${10.0000:.2f}]') // do show the 0s at the end, even though they do not change the number =&gt; [10.00]
+</code></pre>
+<h3 id="string-operators"><a class="header" href="#string-operators">String operators</a></h3>
+<pre><code class="language-v">name := 'Bob'
+bobby := name + 'by' // + is used to concatenate strings
+println(bobby) // &quot;Bobby&quot;
+mut s := 'hello '
+s += 'world' // `+=` is used to append to a string
+println(s) // &quot;hello world&quot;
+</code></pre>
+<p>All operators in V must have values of the same type on both sides. You cannot concatenate an
+integer to a string:</p>
+<pre><code class="language-v failcompile">age := 10
+println('age = ' + age) // not allowed
+</code></pre>
+<blockquote>
+<p>error: infix expr: cannot use <code>int</code> (right expression) as <code>string</code></p>
+</blockquote>
+<p>We have to either convert <code>age</code> to a <code>string</code>:</p>
+<pre><code class="language-v">age := 11
+println('age = ' + age.str())
+</code></pre>
+<p>or use string interpolation (preferred):</p>
+<pre><code class="language-v">age := 12
+println('age = $age')
+</code></pre>
+<h3 id="runes"><a class="header" href="#runes">Runes</a></h3>
+<p>A <code>rune</code> represents a single Unicode character and is an alias for <code>u32</code>. To denote them, use `
+(backticks) :</p>
+<pre><code class="language-v">rocket := `🚀`
+</code></pre>
+<p>A <code>rune</code> can be converted to a UTF-8 string by using the <code>.str()</code> method.</p>
+<pre><code class="language-v">rocket := `🚀`
+assert rocket.str() == '🚀'
+</code></pre>
+<p>A <code>rune</code> can be converted to UTF-8 bytes by using the <code>.bytes()</code> method.</p>
+<pre><code class="language-v">rocket := `🚀`
+assert rocket.bytes() == [byte(0xf0), 0x9f, 0x9a, 0x80]
+</code></pre>
+<p>Hex, Unicode, and Octal escape sequences also work in a <code>rune</code> literal:</p>
+<pre><code class="language-v">assert `\x61` == `a`
+assert `\141` == `a`
+assert `\u0061` == `a`
+
+// multibyte literals work too
+assert `\u2605` == `★`
+assert `\u2605`.bytes() == [byte(0xe2), 0x98, 0x85]
+assert `\xe2\x98\x85`.bytes() == [byte(0xe2), 0x98, 0x85]
+assert `\342\230\205`.bytes() == [byte(0xe2), 0x98, 0x85]
+</code></pre>
+<p>Note that <code>rune</code> literals use the same escape syntax as strings, but they can only hold one unicode
+character. Therefore, if your code does not specify a single Unicode character, you will receive an
+error at compile time.</p>
+<p>Also remember that strings are indexed as bytes, not runes, so beware:</p>
+<pre><code class="language-v">rocket_string := '🚀'
+assert rocket_string[0] != `🚀`
+assert 'aloha!'[0] == `a`
+</code></pre>
+<p>A string can be converted to runes by the <code>.runes()</code> method.</p>
+<pre><code class="language-v">hello := 'Hello World 👋'
+hello_runes := hello.runes() // [`H`, `e`, `l`, `l`, `o`, ` `, `W`, `o`, `r`, `l`, `d`, ` `, `👋`]
+assert hello_runes.string() == hello
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../basics/types/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../basics/types/numbers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../basics/types/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../basics/types/numbers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

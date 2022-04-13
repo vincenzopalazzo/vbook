@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>vbook</title>
+        <title>The V Book</title>
         <meta name="robots" content="noindex" />
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="intro/hello_world.html"><strong aria-hidden="true">1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="intro/project.html"><strong aria-hidden="true">2.</strong> Running a project folder</a></li><li class="chapter-item expanded "><a href="basics/comments.html"><strong aria-hidden="true">3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="basics/variables.html"><strong aria-hidden="true">4.</strong> Variables</a></li><li class="chapter-item expanded "><a href="basics/types/index.html"><strong aria-hidden="true">5.</strong> V types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/types/strings.html"><strong aria-hidden="true">5.1.</strong> Strings</a></li><li class="chapter-item expanded "><a href="basics/types/numbers.html"><strong aria-hidden="true">5.2.</strong> Numbers</a></li><li class="chapter-item expanded "><a href="basics/types/arrays.html"><strong aria-hidden="true">5.3.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="basics/types/maps.html"><strong aria-hidden="true">5.4.</strong> Maps</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -105,7 +105,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">vbook</h1>
+                    <h1 class="menu-title">The V Book</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -185,6 +185,781 @@ V folder in your antivirus program.</p>
 ./vab --device auto run /path/to/v/examples/sokol/particles
 </code></pre>
 <p>For more details and troubleshooting, please visit the <a href="https://github.com/vlang/vab">vab GitHub repository</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h2>
+<pre><code class="language-v">fn main() {
+	println('hello world')
+}
+</code></pre>
+<p>Save this snippet into a file named <code>hello.v</code>. Now do: <code>v run hello.v</code>.</p>
+<blockquote>
+<p>That is assuming you have symlinked your V with <code>v symlink</code>, as described
+<a href="https://github.com/vlang/v/blob/master/README.md#symlinking">here</a>.
+If you haven't yet, you have to type the path to V manually.</p>
+</blockquote>
+<p>Congratulations - you just wrote and executed your first V program!</p>
+<p>You can compile a program without execution with <code>v hello.v</code>.
+See <code>v help</code> for all supported commands.</p>
+<p>From the example above, you can see that functions are declared with the <code>fn</code> keyword.
+The return type is specified after the function name.
+In this case <code>main</code> doesn't return anything, so there is no return type.</p>
+<p>As in many other languages (such as C, Go, and Rust), <code>main</code> is the entry point of your program.</p>
+<p><a href="intro/hello_world.html#println"><code>println</code></a> is one of the few <a href="intro/hello_world.html#builtin-functions">built-in functions</a>.
+It prints the value passed to it to standard output.</p>
+<p><code>fn main()</code> declaration can be skipped in one file programs.
+This is useful when writing small programs, &quot;scripts&quot;, or just learning the language.
+For brevity, <code>fn main()</code> will be skipped in this tutorial.</p>
+<p>This means that a &quot;hello world&quot; program in V is as simple as</p>
+<pre><code class="language-v">println('hello world')
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="running-a-project-folder-with-several-files"><a class="header" href="#running-a-project-folder-with-several-files">Running a project folder with several files</a></h2>
+<p>Suppose you have a folder with several .v files in it, where one of them
+contains your <code>main()</code> function, and the other files have other helper
+functions. They may be organized by topic, but still <em>not yet</em> structured
+enough to be their own separate reusable modules, and you want to compile
+them all into one program.</p>
+<p>In other languages, you would have to use includes or a build system
+to enumerate all files, compile them separately to object files,
+then link them into one final executable.</p>
+<p>In V however, you can compile and run the whole folder of .v files together,
+using just <code>v run .</code>. Passing parameters also works, so you can
+do: <code>v run . --yourparam some_other_stuff</code></p>
+<p>The above will first compile your files into a single program (named
+after your folder/project), and then it will execute the program with
+<code>--yourparam some_other_stuff</code> passed to it as CLI parameters.</p>
+<p>Your program can then use the CLI parameters like this:</p>
+<pre><code class="language-v">import os
+
+println(os.args)
+</code></pre>
+<p>NB: after a successful run, V will delete the generated executable.
+If you want to keep it, use <code>v -keepc run .</code> instead, or just compile
+manually with <code>v .</code> .</p>
+<p>NB: any V compiler flags should be passed <em>before</em> the <code>run</code> command.
+Everything after the source file/folder, will be passed to the program
+as is - it will not be processed by V.</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
+<pre><code class="language-v">// This is a single line comment.
+/*
+This is a multiline comment.
+   /* It can be nested. */
+*/
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
+<pre><code class="language-v">name := 'Bob'
+age := 20
+large_number := i64(9999999999)
+println(name)
+println(age)
+println(large_number)
+</code></pre>
+<p>Variables are declared and initialized with <code>:=</code>. This is the only
+way to declare variables in V. This means that variables always have an initial
+value.</p>
+<p>The variable's type is inferred from the value on the right hand side.
+To choose a different type, use type conversion:
+the expression <code>T(v)</code> converts the value <code>v</code> to the
+type <code>T</code>.</p>
+<p>Unlike most other languages, V only allows defining variables in functions.
+Global (module level) variables are not allowed. There's no global state in V
+(see <a href="basics/variables.html#pure-functions-by-default">Pure functions by default</a> for details).</p>
+<p>For consistency across different code bases, all variable and function names
+must use the <code>snake_case</code> style, as opposed to type names, which must use <code>PascalCase</code>.</p>
+<h3 id="mutable-variables"><a class="header" href="#mutable-variables">Mutable variables</a></h3>
+<pre><code class="language-v">mut age := 20
+println(age)
+age = 21
+println(age)
+</code></pre>
+<p>To change the value of the variable use <code>=</code>. In V, variables are
+immutable by default.
+To be able to change the value of the variable, you have to declare it with <code>mut</code>.</p>
+<p>Try compiling the program above after removing <code>mut</code> from the first line.</p>
+<h3 id="initialization-vs-assignment"><a class="header" href="#initialization-vs-assignment">Initialization vs assignment</a></h3>
+<p>Note the (important) difference between <code>:=</code> and <code>=</code>.
+<code>:=</code> is used for declaring and initializing, <code>=</code> is used for assigning.</p>
+<pre><code class="language-v failcompile">fn main() {
+	age = 21
+}
+</code></pre>
+<p>This code will not compile, because the variable <code>age</code> is not declared.
+All variables need to be declared in V.</p>
+<pre><code class="language-v">fn main() {
+	age := 21
+}
+</code></pre>
+<p>The values of multiple variables can be changed in one line.
+In this way, their values can be swapped without an intermediary variable.</p>
+<pre><code class="language-v">mut a := 0
+mut b := 1
+println('$a, $b') // 0, 1
+a, b = b, a
+println('$a, $b') // 1, 0
+</code></pre>
+<h3 id="declaration-errors"><a class="header" href="#declaration-errors">Declaration errors</a></h3>
+<p>In development mode the compiler will warn you that you haven't used the variable
+(you'll get an &quot;unused variable&quot; warning).
+In production mode (enabled by passing the <code>-prod</code> flag to v – <code>v -prod foo.v</code>)
+it will not compile at all (like in Go).</p>
+<pre><code class="language-v failcompile nofmt">fn main() {
+	a := 10
+	if true {
+		a := 20 // error: redefinition of `a`
+	}
+	// warning: unused variable `a`
+}
+</code></pre>
+<p>Unlike most languages, variable shadowing is not allowed. Declaring a variable with a name
+that is already used in a parent scope will cause a compilation error.</p>
+<p>You can shadow imported modules though, as it is very useful in some situations:</p>
+<pre><code class="language-v ignore">import ui
+import gg
+
+fn draw(ctx &amp;gg.Context) {
+	gg := ctx.parent.get_ui().gg
+	gg.draw_rect(10, 10, 100, 50)
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
+<pre><code class="language-v nofmt">name := 'Bob'
+assert name.len == 3       // will print 3
+assert name[0] == byte(66) // indexing gives a byte, byte(66) == `B`
+assert name[1..3] == 'ob'  // slicing gives a string 'ob'
+
+// escape codes
+windows_newline := '\r\n'      // escape special characters like in C
+assert windows_newline.len == 2
+
+// arbitrary bytes can be directly specified using `\x##` notation where `#` is
+// a hex digit aardvark_str := '\x61ardvark' assert aardvark_str == 'aardvark'
+assert '\xc0'[0] == byte(0xc0)
+
+// or using octal escape `\###` notation where `#` is an octal digit
+aardvark_str2 := '\141ardvark'
+assert aardvark_str2 == 'aardvark'
+
+// Unicode can be specified directly as `\u####` where # is a hex digit
+// and will be converted internally to its UTF-8 representation
+star_str := '\u2605' // ★
+assert star_str == '★'
+assert star_str == '\xe2\x98\x85' // UTF-8 can be specified this way too.
+</code></pre>
+<p>In V, a string is a read-only array of bytes. All Unicode characters are encoded using UTF-8:</p>
+<pre><code class="language-v">s := 'hello 🌎' // emoji takes 4 bytes
+assert s.len == 10
+
+arr := s.bytes() // convert `string` to `[]byte`
+assert arr.len == 10
+
+s2 := arr.bytestr() // convert `[]byte` to `string`
+assert s2 == s
+</code></pre>
+<p>String values are immutable. You cannot mutate elements:</p>
+<pre><code class="language-v failcompile">mut s := 'hello 🌎'
+s[0] = `H` // not allowed
+</code></pre>
+<blockquote>
+<p>error: cannot assign to <code>s[i]</code> since V strings are immutable</p>
+</blockquote>
+<p>Note that indexing a string will produce a <code>byte</code>, not a <code>rune</code> nor another <code>string</code>. Indexes
+correspond to <em>bytes</em> in the string, not Unicode code points. If you want to convert the <code>byte</code> to a
+<code>string</code>, use the <code>.ascii_str()</code> method on the <code>byte</code>:</p>
+<pre><code class="language-v">country := 'Netherlands'
+println(country[0]) // Output: 78
+println(country[0].ascii_str()) // Output: N
+</code></pre>
+<p>Both single and double quotes can be used to denote strings. For consistency, <code>vfmt</code> converts double
+quotes to single quotes unless the string contains a single quote character.</p>
+<p>For raw strings, prepend <code>r</code>. Escape handling is not done for raw strings:</p>
+<pre><code class="language-v">s := r'hello\nworld' // the `\n` will be preserved as two characters
+println(s) // &quot;hello\nworld&quot;
+</code></pre>
+<p>Strings can be easily converted to integers:</p>
+<pre><code class="language-v">s := '42'
+n := s.int() // 42
+
+// all int literals are supported
+assert '0xc3'.int() == 195
+assert '0o10'.int() == 8
+assert '0b1111_0000_1010'.int() == 3850
+assert '-0b1111_0000_1010'.int() == -3850
+</code></pre>
+<p>For more advanced <code>string</code> processing and conversions, refer to the
+<a href="https://modules.vlang.io/strconv.html">vlib/strconv</a> module.</p>
+<h3 id="string-interpolation"><a class="header" href="#string-interpolation">String interpolation</a></h3>
+<p>Basic interpolation syntax is pretty simple - use <code>$</code> before a variable name. The variable will be
+converted to a string and embedded into the literal:</p>
+<pre><code class="language-v">name := 'Bob'
+println('Hello, $name!') // Hello, Bob!
+</code></pre>
+<p>It also works with fields: <code>'age = $user.age'</code>. If you need more complex expressions, use <code>${}</code>:
+<code>'can register = ${user.age &gt; 13}'</code>.</p>
+<p>Format specifiers similar to those in C's <code>printf()</code> are also supported. <code>f</code>, <code>g</code>, <code>x</code>, <code>o</code>, <code>b</code>,
+etc. are optional and specify the output format. The compiler takes care of the storage size, so
+there is no <code>hd</code> or <code>llu</code>.</p>
+<p>To use a format specifier, follow this pattern:</p>
+<p><code>${varname:[flags][width][.precision][type]}</code></p>
+<ul>
+<li>flags: may be zero or more of the following: <code>-</code> to left-align output within the field, <code>0</code> to use
+<code>0</code> as the padding character instead of the default <code>space</code> character. (Note: V does not currently
+support the use of <code>'</code> or <code>#</code> as format flags, and V supports but doesn't need <code>+</code> to right-align
+since that's the default.)</li>
+<li>width: may be an integer value describing the minimum width of total field to output.</li>
+<li>precision: an integer value preceded by a <code>.</code> will guarantee that many digits after the decimal
+point, if the input variable is a float. Ignored if variable is an integer.</li>
+<li>type: <code>f</code> and <code>F</code> specify the input is a float and should be rendered as such, <code>e</code> and <code>E</code> specify
+the input is a float and should be rendered as an exponent (partially broken), <code>g</code> and <code>G</code> specify
+the input is a float--the renderer will use floating point notation for small values and exponent
+notation for large values, <code>d</code> specifies the input is an integer and should be rendered in base-10
+digits, <code>x</code> and <code>X</code> require an integer and will render it as hexadecimal digits, <code>o</code> requires an
+integer and will render it as octal digits, <code>b</code> requires an integer and will render it as binary
+digits, <code>s</code> requires a string (almost never used).</li>
+</ul>
+<p>Note: when a numeric type can render alphabetic characters, such as hex strings or special values
+like <code>infinity</code>, the lowercase version of the type forces lowercase alphabetics and the uppercase
+version forces uppercase alphabetics.</p>
+<p>Also note: in most cases, it's best to leave the format type empty. Floats will be rendered by
+default as <code>g</code>, integers will be rendered by default as <code>d</code>, and <code>s</code> is almost always redundant.
+There are only three cases where specifying a type is recommended:</p>
+<ul>
+<li>format strings are parsed at compile time, so specifing a type can help detect errors then</li>
+<li>format strings default to using lowercase letters for hex digits and the <code>e</code> in exponents. Use a
+uppercase type to force the use of uppercase hex digits and an uppercase <code>E</code> in exponents.</li>
+<li>format strings are the most convenient way to get hex, binary or octal strings from an integer.</li>
+</ul>
+<p>See
+<a href="https://en.wikipedia.org/wiki/Printf_format_string#Format_placeholder_specification">Format Placeholder Specification</a>
+for more information.</p>
+<pre><code class="language-v">x := 123.4567
+println('[${x:.2}]') // round to two decimal places =&gt; [123.46]
+println('[${x:10}]') // right-align with spaces on the left =&gt; [   123.457]
+println('[${int(x):-10}]') // left-align with spaces on the right =&gt; [123       ]
+println('[${int(x):010}]') // pad with zeros on the left =&gt; [0000000123]
+println('[${int(x):b}]') // output as binary =&gt; [1111011]
+println('[${int(x):o}]') // output as octal =&gt; [173]
+println('[${int(x):X}]') // output as uppercase hex =&gt; [7B]
+
+println('[${10.0000:.2}]') // remove insignificant 0s at the end =&gt; [10]
+println('[${10.0000:.2f}]') // do show the 0s at the end, even though they do not change the number =&gt; [10.00]
+</code></pre>
+<h3 id="string-operators"><a class="header" href="#string-operators">String operators</a></h3>
+<pre><code class="language-v">name := 'Bob'
+bobby := name + 'by' // + is used to concatenate strings
+println(bobby) // &quot;Bobby&quot;
+mut s := 'hello '
+s += 'world' // `+=` is used to append to a string
+println(s) // &quot;hello world&quot;
+</code></pre>
+<p>All operators in V must have values of the same type on both sides. You cannot concatenate an
+integer to a string:</p>
+<pre><code class="language-v failcompile">age := 10
+println('age = ' + age) // not allowed
+</code></pre>
+<blockquote>
+<p>error: infix expr: cannot use <code>int</code> (right expression) as <code>string</code></p>
+</blockquote>
+<p>We have to either convert <code>age</code> to a <code>string</code>:</p>
+<pre><code class="language-v">age := 11
+println('age = ' + age.str())
+</code></pre>
+<p>or use string interpolation (preferred):</p>
+<pre><code class="language-v">age := 12
+println('age = $age')
+</code></pre>
+<h3 id="runes"><a class="header" href="#runes">Runes</a></h3>
+<p>A <code>rune</code> represents a single Unicode character and is an alias for <code>u32</code>. To denote them, use `
+(backticks) :</p>
+<pre><code class="language-v">rocket := `🚀`
+</code></pre>
+<p>A <code>rune</code> can be converted to a UTF-8 string by using the <code>.str()</code> method.</p>
+<pre><code class="language-v">rocket := `🚀`
+assert rocket.str() == '🚀'
+</code></pre>
+<p>A <code>rune</code> can be converted to UTF-8 bytes by using the <code>.bytes()</code> method.</p>
+<pre><code class="language-v">rocket := `🚀`
+assert rocket.bytes() == [byte(0xf0), 0x9f, 0x9a, 0x80]
+</code></pre>
+<p>Hex, Unicode, and Octal escape sequences also work in a <code>rune</code> literal:</p>
+<pre><code class="language-v">assert `\x61` == `a`
+assert `\141` == `a`
+assert `\u0061` == `a`
+
+// multibyte literals work too
+assert `\u2605` == `★`
+assert `\u2605`.bytes() == [byte(0xe2), 0x98, 0x85]
+assert `\xe2\x98\x85`.bytes() == [byte(0xe2), 0x98, 0x85]
+assert `\342\230\205`.bytes() == [byte(0xe2), 0x98, 0x85]
+</code></pre>
+<p>Note that <code>rune</code> literals use the same escape syntax as strings, but they can only hold one unicode
+character. Therefore, if your code does not specify a single Unicode character, you will receive an
+error at compile time.</p>
+<p>Also remember that strings are indexed as bytes, not runes, so beware:</p>
+<pre><code class="language-v">rocket_string := '🚀'
+assert rocket_string[0] != `🚀`
+assert 'aloha!'[0] == `a`
+</code></pre>
+<p>A string can be converted to runes by the <code>.runes()</code> method.</p>
+<pre><code class="language-v">hello := 'Hello World 👋'
+hello_runes := hello.runes() // [`H`, `e`, `l`, `l`, `o`, ` `, `W`, `o`, `r`, `l`, `d`, ` `, `👋`]
+assert hello_runes.string() == hello
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="numbers"><a class="header" href="#numbers">Numbers</a></h3>
+<pre><code class="language-v">a := 123
+</code></pre>
+<p>This will assign the value of 123 to <code>a</code>. By default <code>a</code> will have the
+type <code>int</code>.</p>
+<p>You can also use hexadecimal, binary or octal notation for integer literals:</p>
+<pre><code class="language-v">a := 0x7B
+b := 0b01111011
+c := 0o173
+</code></pre>
+<p>All of these will be assigned the same value, 123. They will all have type
+<code>int</code>, no matter what notation you used.</p>
+<p>V also supports writing numbers with <code>_</code> as separator:</p>
+<pre><code class="language-v">num := 1_000_000 // same as 1000000
+three := 0b0_11 // same as 0b11
+float_num := 3_122.55 // same as 3122.55
+hexa := 0xF_F // same as 255
+oct := 0o17_3 // same as 0o173
+</code></pre>
+<p>If you want a different type of integer, you can use casting:</p>
+<pre><code class="language-v">a := i64(123)
+b := byte(42)
+c := i16(12345)
+</code></pre>
+<p>Assigning floating point numbers works the same way:</p>
+<pre><code class="language-v">f := 1.0
+f1 := f64(3.14)
+f2 := f32(3.14)
+</code></pre>
+<p>If you do not specify the type explicitly, by default float literals
+will have the type of <code>f64</code>.</p>
+<p>Float literals can also be declared as a power of ten:</p>
+<pre><code class="language-v">f0 := 42e1 // 420
+f1 := 123e-2 // 1.23
+f2 := 456e+2 // 45600
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
+<p>An array is a collection of data elements of the same type. An array literal is a
+list of expressions surrounded by square brackets. An individual element can be
+accessed using an <em>index</em> expression. Indexes start from <code>0</code>:</p>
+<pre><code class="language-v">mut nums := [1, 2, 3]
+println(nums) // `[1, 2, 3]`
+println(nums[0]) // `1`
+println(nums[1]) // `2`
+
+nums[1] = 5
+println(nums) // `[1, 5, 3]`
+</code></pre>
+<a id='array-operations' />
+<p>An element can be appended to the end of an array using the push operator <code>&lt;&lt;</code>.
+It can also append an entire array.</p>
+<pre><code class="language-v">mut nums := [1, 2, 3]
+nums &lt;&lt; 4
+println(nums) // &quot;[1, 2, 3, 4]&quot;
+
+// append array
+nums &lt;&lt; [5, 6, 7]
+println(nums) // &quot;[1, 2, 3, 4, 5, 6, 7]&quot;
+</code></pre>
+<pre><code class="language-v">mut names := ['John']
+names &lt;&lt; 'Peter'
+names &lt;&lt; 'Sam'
+// names &lt;&lt; 10  &lt;-- This will not compile. `names` is an array of strings.
+</code></pre>
+<p><code>val in array</code> returns true if the array contains <code>val</code>. See <a href="basics/types/arrays.html#in-operator"><code>in</code> operator</a>.</p>
+<pre><code class="language-v">names := ['John', 'Peter', 'Sam']
+println('Alex' in names) // &quot;false&quot;
+</code></pre>
+<h4 id="array-fields"><a class="header" href="#array-fields">Array Fields</a></h4>
+<p>There are two fields that control the &quot;size&quot; of an array:</p>
+<ul>
+<li><code>len</code>: <em>length</em> - the number of pre-allocated and initialized elements in the array</li>
+<li><code>cap</code>: <em>capacity</em> - the amount of memory space which has been reserved for elements,
+but not initialized or counted as elements. The array can grow up to this size without
+being reallocated. Usually, V takes care of this field automatically but there are
+cases where the user may want to do manual optimizations (see <a href="basics/types/arrays.html#array-initialization">below</a>).</li>
+</ul>
+<pre><code class="language-v">mut nums := [1, 2, 3]
+println(nums.len) // &quot;3&quot;
+println(nums.cap) // &quot;3&quot; or greater
+nums = [] // The array is now empty
+println(nums.len) // &quot;0&quot;
+</code></pre>
+<p><code>data</code> is a field (of type <code>voidptr</code>) with the address of the first 
+element. This is for low-level <a href="basics/types/arrays.html#memory-unsafe-code"><code>unsafe</code></a> code.</p>
+<p>Note that the fields are read-only and can't be modified by the user.</p>
+<h4 id="array-initialization"><a class="header" href="#array-initialization">Array Initialization</a></h4>
+<p>The type of an array is determined by the first element:</p>
+<ul>
+<li><code>[1, 2, 3]</code> is an array of ints (<code>[]int</code>).</li>
+<li><code>['a', 'b']</code> is an array of strings (<code>[]string</code>).</li>
+</ul>
+<p>The user can explicitly specify the type for the first element: <code>[byte(16), 32, 64, 128]</code>.
+V arrays are homogeneous (all elements must have the same type).
+This means that code like <code>[1, 'a']</code> will not compile.</p>
+<p>The above syntax is fine for a small number of known elements but for very large or empty
+arrays there is a second initialization syntax:</p>
+<pre><code class="language-v">mut a := []int{len: 10000, cap: 30000, init: 3}
+</code></pre>
+<p>This creates an array of 10000 <code>int</code> elements that are all initialized with <code>3</code>. Memory
+space is reserved for 30000 elements. The parameters <code>len</code>, <code>cap</code> and <code>init</code> are optional;
+<code>len</code> defaults to <code>0</code> and <code>init</code> to the default initialization of the element type (<code>0</code>
+for numerical type, <code>''</code> for <code>string</code>, etc). The run time system makes sure that the
+capacity is not smaller than <code>len</code> (even if a smaller value is specified explicitly):</p>
+<pre><code class="language-v">arr := []int{len: 5, init: -1}
+// `arr == [-1, -1, -1, -1, -1]`, arr.cap == 5
+
+// Declare an empty array:
+users := []int{}
+</code></pre>
+<p>Setting the capacity improves performance of pushing elements to the array
+as reallocations can be avoided:</p>
+<pre><code class="language-v">mut numbers := []int{cap: 1000}
+println(numbers.len) // 0
+// Now appending elements won't reallocate
+for i in 0 .. 1000 {
+	numbers &lt;&lt; i
+}
+</code></pre>
+<p>Note: The above code uses a <a href="basics/types/arrays.html#range-for">range <code>for</code></a> statement.</p>
+<p>You can initialize the array by accessing the <code>it</code> variable which gives 
+the index as shown here:</p>
+<pre><code class="language-v">count := []int{len: 4, init: it}
+assert count == [0, 1, 2, 3]
+
+mut square := []int{len: 6, init: it * it}
+// square == [0, 1, 4, 9, 16, 25]
+</code></pre>
+<h4 id="array-types"><a class="header" href="#array-types">Array Types</a></h4>
+<p>An array can be of these types:
+| Types        | Example Definition                   |
+| ------------ | ------------------------------------ |
+| Number       | <code>[]int,[]i64</code>                        |
+| String       | <code>[]string</code>                           |
+| Rune         | <code>[]rune</code>                             |
+| Boolean      | <code>[]bool</code>                             |
+| Array        | <code>[][]int</code>                            |
+| Struct       | <code>[]MyStructName</code>                     |
+| Channel      | <code>[]chan f64</code>                         |
+| Function     | <code>[]MyFunctionType</code> <code>[]fn (int) bool</code> |
+| Interface    | <code>[]MyInterfaceName</code>                  |
+| Sum Type     | <code>[]MySumTypeName</code>                    |
+| Generic Type | <code>[]T</code>                                |
+| Map          | <code>[]map[string]f64</code>                   |
+| Enum         | <code>[]MyEnumType</code>                       |
+| Alias        | <code>[]MyAliasTypeName</code>                  |
+| Thread       | <code>[]thread int</code>                       |
+| Reference    | <code>[]&amp;f64</code>                             |
+| Shared       | <code>[]shared MyStructType</code>              |</p>
+<p><strong>Example Code:</strong></p>
+<p>This example uses <a href="basics/types/arrays.html#structs">Structs</a> and <a href="basics/types/arrays.html#sum-types">Sum Types</a> to create an array
+which can handle different types (e.g. Points, Lines) of data elements.</p>
+<pre><code class="language-v">struct Point {
+	x int
+	y int
+}
+
+struct Line {
+	p1 Point
+	p2 Point
+}
+
+type ObjectSumType = Line | Point
+
+mut object_list := []ObjectSumType{}
+object_list &lt;&lt; Point{1, 1}
+object_list &lt;&lt; Line{
+	p1: Point{3, 3}
+	p2: Point{4, 4}
+}
+dump(object_list)
+/*
+object_list: [ObjectSumType(Point{
+    x: 1
+    y: 1
+}), ObjectSumType(Line{
+    p1: Point{
+        x: 3
+        y: 3
+    }
+    p2: Point{
+        x: 4
+        y: 4
+    }
+})]
+*/
+</code></pre>
+<h4 id="multidimensional-arrays"><a class="header" href="#multidimensional-arrays">Multidimensional Arrays</a></h4>
+<p>Arrays can have more than one dimension.</p>
+<p>2d array example:</p>
+<pre><code class="language-v">mut a := [][]int{len: 2, init: []int{len: 3}}
+a[0][1] = 2
+println(a) // [[0, 2, 0], [0, 0, 0]]
+</code></pre>
+<p>3d array example:</p>
+<pre><code class="language-v">mut a := [][][]int{len: 2, init: [][]int{len: 3, init: []int{len: 2}}}
+a[0][1][1] = 2
+println(a) // [[[0, 0], [0, 2], [0, 0]], [[0, 0], [0, 0], [0, 0]]]
+</code></pre>
+<h4 id="array-methods"><a class="header" href="#array-methods">Array methods</a></h4>
+<p>All arrays can be easily printed with <code>println(arr)</code> and converted to a string
+with <code>s := arr.str()</code>.</p>
+<p>Copying the data from the array is done with <code>.clone()</code>:</p>
+<pre><code class="language-v">nums := [1, 2, 3]
+nums_copy := nums.clone()
+</code></pre>
+<p>Arrays can be efficiently filtered and mapped with the <code>.filter()</code> and
+<code>.map()</code> methods:</p>
+<pre><code class="language-v">nums := [1, 2, 3, 4, 5, 6]
+even := nums.filter(it % 2 == 0)
+println(even) // [2, 4, 6]
+// filter can accept anonymous functions
+even_fn := nums.filter(fn (x int) bool {
+	return x % 2 == 0
+})
+println(even_fn)
+</code></pre>
+<pre><code class="language-v">words := ['hello', 'world']
+upper := words.map(it.to_upper())
+println(upper) // ['HELLO', 'WORLD']
+// map can also accept anonymous functions
+upper_fn := words.map(fn (w string) string {
+	return w.to_upper()
+})
+println(upper_fn) // ['HELLO', 'WORLD']
+</code></pre>
+<p><code>it</code> is a builtin variable which refers to the element currently being 
+processed in filter/map methods.</p>
+<p>Additionally, <code>.any()</code> and <code>.all()</code> can be used to conveniently test
+for elements that satisfy a condition.</p>
+<pre><code class="language-v">nums := [1, 2, 3]
+println(nums.any(it == 2)) // true
+println(nums.all(it &gt;= 2)) // false
+</code></pre>
+<p>There are further built-in methods for arrays:</p>
+<ul>
+<li><code>a.repeat(n)</code> concatenates the array elements <code>n</code> times </li>
+<li><code>a.insert(i, val)</code> inserts a new element <code>val</code> at index <code>i</code> and 
+shifts all following elements to the right</li>
+<li><code>a.insert(i, [3, 4, 5])</code> inserts several elements</li>
+<li><code>a.prepend(val)</code> inserts a value at the beginning, equivalent to <code>a.insert(0, val)</code></li>
+<li><code>a.prepend(arr)</code> inserts elements of array <code>arr</code> at the beginning</li>
+<li><code>a.trim(new_len)</code> truncates the length (if <code>new_length &lt; a.len</code>, otherwise does nothing)</li>
+<li><code>a.clear()</code> empties the array without changing <code>cap</code> (equivalent to <code>a.trim(0)</code>)</li>
+<li><code>a.delete_many(start, size)</code> removes <code>size</code> consecutive elements from index <code>start</code>
+– triggers reallocation</li>
+<li><code>a.delete(index)</code> equivalent to <code>a.delete_many(index, 1)</code></li>
+<li><code>a.delete_last()</code> removes the last element</li>
+<li><code>a.first()</code> equivalent to <code>a[0]</code></li>
+<li><code>a.last()</code> equivalent to <code>a[a.len - 1]</code></li>
+<li><code>a.pop()</code> removes the last element and returns it</li>
+<li><code>a.reverse()</code> makes a new array with the elements of <code>a</code> in reverse order</li>
+<li><code>a.reverse_in_place()</code> reverses the order of elements in <code>a</code></li>
+<li><code>a.join(joiner)</code> concatenates an array of strings into one string 
+using <code>joiner</code> string as a separator</li>
+</ul>
+<p>See also <a href="https://modules.vlang.io/arrays.html">vlib/arrays</a>.</p>
+<h5 id="sorting-arrays"><a class="header" href="#sorting-arrays">Sorting Arrays</a></h5>
+<p>Sorting arrays of all kinds is very simple and intuitive. Special variables <code>a</code> and <code>b</code>
+are used when providing a custom sorting condition.</p>
+<pre><code class="language-v">mut numbers := [1, 3, 2]
+numbers.sort() // 1, 2, 3
+numbers.sort(a &gt; b) // 3, 2, 1
+</code></pre>
+<pre><code class="language-v">struct User {
+	age  int
+	name string
+}
+
+mut users := [User{21, 'Bob'}, User{20, 'Zarkon'}, User{25, 'Alice'}]
+users.sort(a.age &lt; b.age) // sort by User.age int field
+users.sort(a.name &gt; b.name) // reverse sort by User.name string field
+</code></pre>
+<p>V also supports custom sorting, through the <code>sort_with_compare</code> array method.
+Which expects a comparing function which will define the sort order.
+Useful for sorting on multiple fields at the same time by custom sorting rules.
+The code below sorts the array ascending on <code>name</code> and descending <code>age</code>.</p>
+<pre><code class="language-v">struct User {
+	age  int
+	name string
+}
+
+mut users := [User{21, 'Bob'}, User{65, 'Bob'}, User{25, 'Alice'}]
+
+custom_sort_fn := fn (a &amp;User, b &amp;User) int {
+	// return -1 when a comes before b
+	// return 0, when both are in same order
+	// return 1 when b comes before a
+	if a.name == b.name {
+		if a.age &lt; b.age {
+			return 1
+		}
+		if a.age &gt; b.age {
+			return -1
+		}
+		return 0
+	}
+	if a.name &lt; b.name {
+		return -1
+	} else if a.name &gt; b.name {
+		return 1
+	}
+	return 0
+}
+users.sort_with_compare(custom_sort_fn)
+</code></pre>
+<h4 id="array-slices"><a class="header" href="#array-slices">Array Slices</a></h4>
+<p>A slice is a part of a parent array. Initially it refers to the elements
+between two indices separated by a <code>..</code> operator. The right-side index must
+be greater than or equal to the left side index.</p>
+<p>If a right-side index is absent, it is assumed to be the array length. If a
+left-side index is absent, it is assumed to be 0.</p>
+<pre><code class="language-v">nums := [0, 10, 20, 30, 40]
+println(nums[1..4]) // [10, 20, 30]
+println(nums[..4]) // [0, 10, 20, 30]
+println(nums[1..]) // [10, 20, 30, 40]
+</code></pre>
+<p>In V slices are arrays themselves (they are not distinct types). As a result
+all array operations may be performed on them. E.g. they can be pushed onto an
+array of the same type:</p>
+<pre><code class="language-v">array_1 := [3, 5, 4, 7, 6]
+mut array_2 := [0, 1]
+array_2 &lt;&lt; array_1[..3]
+println(array_2) // `[0, 1, 3, 5, 4]`
+</code></pre>
+<p>A slice is always created with the smallest possible capacity <code>cap == len</code> (see
+<a href="basics/types/arrays.html#array-initialization"><code>cap</code> above</a>) no matter what the capacity or length
+of the parent array is. As a result it is immediately reallocated and copied to another
+memory location when the size increases thus becoming independent from the
+parent array (<em>copy on grow</em>). In particular pushing elements to a slice
+does not alter the parent:</p>
+<pre><code class="language-v">mut a := [0, 1, 2, 3, 4, 5]
+mut b := a[2..4]
+b[0] = 7 // `b[0]` is referring to `a[2]`
+println(a) // `[0, 1, 7, 3, 4, 5]`
+b &lt;&lt; 9
+// `b` has been reallocated and is now independent from `a`
+println(a) // `[0, 1, 7, 3, 4, 5]` - no change
+println(b) // `[7, 3, 9]`
+</code></pre>
+<p>Appending to the parent array may or may not make it independent from its child slices.
+The behaviour depends on the parent's capacity and is predictable:</p>
+<pre><code class="language-v">mut a := []int{len: 5, cap: 6, init: 2}
+mut b := a[1..4]
+a &lt;&lt; 3
+// no reallocation - fits in `cap`
+b[2] = 13 // `a[3]` is modified
+a &lt;&lt; 4
+// a has been reallocated and is now independent from `b` (`cap` was exceeded)
+b[1] = 3 // no change in `a`
+println(a) // `[2, 2, 2, 13, 2, 3, 4]`
+println(b) // `[2, 3, 13]`
+</code></pre>
+<p>You can call .clone() on the slice, if you do want to have an independent copy right away:</p>
+<pre><code class="language-v">mut a := [0, 1, 2, 3, 4, 5]
+mut b := a[2..4].clone()
+b[0] = 7 // NB: `b[0]` is NOT referring to `a[2]`, as it would have been, without the .clone()
+println(a) // [0, 1, 2, 3, 4, 5]
+println(b) // [7, 3]
+</code></pre>
+<h5 id="slices-with-negative-indexes"><a class="header" href="#slices-with-negative-indexes">Slices with negative indexes</a></h5>
+<p>V supports array and string slices with negative indexes.
+Negative indexing starts from the end of the array towards the start,
+for example <code>-3</code> is equal to <code>array.len - 3</code>. 
+Negative slices have a different syntax from normal slices, i.e. you need
+to add a <code>gate</code> between the array name and the square bracket: <code>a#[..-3]</code>.
+The <code>gate</code> specifies that this is a different type of slice and remember that
+the result is &quot;locked&quot; inside the array.
+The returned slice is always a valid array, though it may be empty:</p>
+<pre><code class="language-v">a := [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+println(a#[-3..]) // [7, 8, 9]
+println(a#[-20..]) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+println(a#[-20..-8]) // [0, 1]
+println(a#[..-3]) // [0, 1, 2, 3, 4, 5, 6]
+
+// empty arrays
+println(a#[-20..-10]) // []
+println(a#[20..10]) // []
+println(a#[20..30]) // []
+</code></pre>
+<h4 id="array-method-chaining"><a class="header" href="#array-method-chaining">Array method chaining</a></h4>
+<p>You can chain the calls of array methods like <code>.filter()</code> and <code>.map()</code> and use
+the <code>it</code> built-in variable to achieve a classic <code>map/filter</code> functional paradigm:</p>
+<pre><code class="language-v">// using filter, map and negatives array slices
+files := ['pippo.jpg', '01.bmp', '_v.txt', 'img_02.jpg', 'img_01.JPG']
+filtered := files.filter(it#[-4..].to_lower() == '.jpg').map(it.to_upper())
+// ['PIPPO.JPG', 'IMG_02.JPG', 'IMG_01.JPG']
+</code></pre>
+<h3 id="fixed-size-arrays"><a class="header" href="#fixed-size-arrays">Fixed size arrays</a></h3>
+<p>V also supports arrays with fixed size. Unlike ordinary arrays, their
+length is constant. You cannot append elements to them, nor shrink them.
+You can only modify their elements in place.</p>
+<p>However, access to the elements of fixed size arrays is more efficient,
+they need less memory than ordinary arrays, and unlike ordinary arrays,
+their data is on the stack, so you may want to use them as buffers if you
+do not want additional heap allocations.</p>
+<p>Most methods are defined to work on ordinary arrays, not on fixed size arrays.
+You can convert a fixed size array to an ordinary array with slicing:</p>
+<pre><code class="language-v">mut fnums := [3]int{} // fnums is a fixed size array with 3 elements.
+fnums[0] = 1
+fnums[1] = 10
+fnums[2] = 100
+println(fnums) // =&gt; [1, 10, 100]
+println(typeof(fnums).name) // =&gt; [3]int
+
+fnums2 := [1, 10, 100]! // short init syntax that does the same (the syntax will probably change)
+
+anums := fnums[..] // same as `anums := fnums[0..fnums.len]`
+println(anums) // =&gt; [1, 10, 100]
+println(typeof(anums).name) // =&gt; []int
+</code></pre>
+<p>Note that slicing will cause the data of the fixed size array to be copied to
+the newly created ordinary array.</p>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="maps"><a class="header" href="#maps">Maps</a></h3>
+<pre><code class="language-v">mut m := map[string]int{} // a map with `string` keys and `int` values
+m['one'] = 1
+m['two'] = 2
+println(m['one']) // &quot;1&quot;
+println(m['bad_key']) // &quot;0&quot;
+println('bad_key' in m) // Use `in` to detect whether such key exists
+println(m.keys()) // ['one', 'two']
+m.delete('two')
+</code></pre>
+<p>Maps can have keys of type string, rune, integer, float or voidptr.</p>
+<p>The whole map can be initialized using this short syntax:</p>
+<pre><code class="language-v">numbers := {
+	'one': 1
+	'two': 2
+}
+println(numbers)
+</code></pre>
+<p>If a key is not found, a zero value is returned by default:</p>
+<pre><code class="language-v">sm := {
+	'abc': 'xyz'
+}
+val := sm['bad_key']
+println(val) // ''
+</code></pre>
+<pre><code class="language-v">intm := {
+	1: 1234
+	2: 5678
+}
+s := intm[3]
+println(s) // 0
+</code></pre>
+<p>It's also possible to use an <code>or {}</code> block to handle missing keys:</p>
+<pre><code class="language-v">mm := map[string]int{}
+val := mm['bad_key'] or { panic('key not found') }
+</code></pre>
+<p>The same optional check applies to arrays:</p>
+<pre><code class="language-v">arr := [1, 2, 3]
+large_index := 999
+val := arr[large_index] or { panic('out of bounds') }
+println(val)
+// you can also do this, if you want to *propagate* the access error:
+val2 := arr[333] ?
+println(val2)
+</code></pre>
 
                     </main>
 
